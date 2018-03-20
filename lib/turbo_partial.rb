@@ -19,24 +19,23 @@ module TurboPartial
   end
 
   module ActionView
-    module Renderer
-      def render(context, options, &block)
-        if options.key? :path
-          path = options.delete :path
-          full_path = if path.start_with? '/'
-            'app/views' + path
-          elsif path.start_with? '.'
-            #TODO
-          end
-          full_path.sub!(/(\/)([^\/]*)$/, '/_\2')
-          method_name_prefix = TurboPartial.compute_method_name full_path
-          if (meth = context.methods.grep(/^#{method_name_prefix}/).first)
-            context.public_send meth, options[:locals], context.output_buffer
-            nil
-          else
-            options[:partial] = path
-            super
-          end
+    module PartialRenderer
+      def render(context, options, block)
+        setup(context, options, block)
+
+        if @path.start_with? '/'
+          full_path = 'app/views' + @path
+        elsif @path.start_with? '.'
+          #TODO
+        else
+          return super
+        end
+        full_path.sub!(/(\/)([^\/]*)$/, '/_\2')
+        method_name_prefix = TurboPartial.compute_method_name full_path
+        if (meth = context.methods.grep(/^#{method_name_prefix}/).first)
+          Rails.logger.debug 'turbo_rendering...'
+          context.public_send meth, options[:locals], context.output_buffer
+          nil
         else
           super
         end
@@ -45,4 +44,4 @@ module TurboPartial
   end
 end
 
-ActionView::Renderer.prepend TurboPartial::ActionView::Renderer
+::ActionView::PartialRenderer.prepend TurboPartial::ActionView::PartialRenderer
