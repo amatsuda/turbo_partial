@@ -21,6 +21,12 @@ module TurboPartial
       end
     end
   end
-end
 
-ActionView::Renderer.prepend TurboPartial::RelativeRenderer
+  class Railtie < ::Rails::Railtie
+    initializer 'turbo_partial' do
+      ActiveSupport.on_load :action_view do
+        ActionView::Renderer.prepend TurboPartial::RelativeRenderer
+      end
+    end
+  end
+end
