@@ -1,11 +1,6 @@
-
-lib = File.expand_path("../lib", __FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "turbo_partial/version"
-
 Gem::Specification.new do |spec|
   spec.name          = "turbo_partial"
-  spec.version       = TurboPartial::VERSION
+  spec.version       = '0.1.0'
   spec.authors       = ["Akira Matsuda"]
   spec.email         = ["ronnie@dio.jp"]
 

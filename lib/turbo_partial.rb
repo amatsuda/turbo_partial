@@ -1,5 +1,3 @@
-require "turbo_partial/version"
-
 module TurboPartial
   module RelativeRenderer
     def render_partial(context, options, &block)
