@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative 'turbo_partial/railtie'
+
 module TurboPartial
   module RelativeRenderer
     def render_partial(context, options, &block)
@@ -52,14 +54,6 @@ module TurboPartial
 
       else
         super
-      end
-    end
-  end
-
-  class Railtie < ::Rails::Railtie
-    initializer 'turbo_partial' do
-      ActiveSupport.on_load :action_view do
-        ActionView::Renderer.prepend TurboPartial::RelativeRenderer
       end
     end
   end
