@@ -9,7 +9,8 @@ module TurboPartial
       if partial.start_with? './'
         current_template = context.instance_variable_get :@current_template
         current_path = current_template.identifier
-        partial_path = File.join(File.dirname(current_path), "_#{partial[2..-1]}#{current_path[/\..*/]}")
+        current_ext = current_path[/\..*/]
+        partial_path = File.join(File.dirname(current_path), "_#{partial[2..-1]}#{current_ext}")
 
         if (partial_template = ObjectSpace.each_object(ActionView::Template).detect {|o| o.identifier == partial_path })
           partial_template.render context, options[:locals]
