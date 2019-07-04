@@ -7,6 +7,10 @@ module TurboPartial
         if ActionView::VERSION::MAJOR >= 6
           require_relative 'renderer'
           ActionView::Renderer.prepend TurboPartial::Renderer
+        else
+          require_relative 'renderer_rails5'
+          ActionView::Base.prepend TurboPartial::Renderer::Rails5
+          ActionView::Template.prepend TurboPartial::Template::CurrentTemplateSetter
         end
       end
     end
