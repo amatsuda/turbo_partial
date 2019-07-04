@@ -12,6 +12,8 @@ module TurboPartialTestApp
 
   Application.routes.draw do
     resources :beers, only: :index
+
+    resources :sushis, only: :index
   end
 end
 
@@ -19,10 +21,16 @@ module ApplicationHelper; end
 
 ApplicationController = Class.new ActionController::Base
 
-Beer = Struct.new :id
+Sushi = Beer = Struct.new :id
 
 class BeersController < ApplicationController
   def index
     @beers = 10.times.map {|i| Beer.new i + 1 }
+  end
+end
+
+class SushisController < ApplicationController
+  def index
+    @sushis = 10.times.map {|i| Sushi.new i + 1 }
   end
 end
