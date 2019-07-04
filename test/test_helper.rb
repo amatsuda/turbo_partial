@@ -6,6 +6,7 @@ require 'rails'
 require "turbo_partial"
 
 require "minitest/autorun"
+require 'byebug'
 
 ENV['RAILS_ENV'] = 'test'
 
