@@ -1,5 +1,3 @@
-require 'rails'
-
 module TurboPartial
   module RelativeRenderer
     def render_partial(context, options, &block)
