@@ -12,7 +12,7 @@ module TurboPartial
         current_ext = current_path[/\..*/]
         partial_path = File.join(File.dirname(current_path), "_#{partial[2..-1]}#{current_ext}")
 
-        if (partial_template = ObjectSpace.each_object(ActionView::Template).detect {|o| o.identifier == partial_path })
+        if (partial_template = TurboPartial::TemplateCache[partial_path])
           partial_template.render context, options[:locals]
         else
           options[:partial] = partial[2..-1]
@@ -27,7 +27,7 @@ module TurboPartial
         absolute_partial_path = File.expand_path partial, File.dirname(current_path)
         partial_path = "#{absolute_partial_path.sub(/\/([^\/]*)$/, '/_\1')}#{current_ext}"
 
-        if (partial_template = ObjectSpace.each_object(ActionView::Template).detect {|o| o.identifier == partial_path })
+        if (partial_template = TurboPartial::TemplateCache[partial_path])
           partial_template.render context, options[:locals]
         else
           current_view_path = context.view_paths.paths.detect {|vp| current_path.start_with? vp.path}&.path
@@ -43,7 +43,7 @@ module TurboPartial
         current_ext = current_path[/\..*/]
         partial_path = "#{current_view_path}#{partial.sub(/\/([^\/]*)$/, '/_\1')}#{current_ext}"
 
-        if (partial_template = ObjectSpace.each_object(ActionView::Template).detect {|o| o.identifier == partial_path })
+        if (partial_template = TurboPartial::TemplateCache[partial_path])
           partial_template.render context, options[:locals]
         else
           options[:partial] = partial[1..-1]

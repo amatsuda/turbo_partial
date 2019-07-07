@@ -12,6 +12,9 @@ module TurboPartial
           ActionView::Base.prepend TurboPartial::Renderer::Rails5
           ActionView::Template.prepend TurboPartial::Template::CurrentTemplateSetter
         end
+
+        require_relative 'template_cache'
+        ActionView::Template.prepend TurboPartial::Template::TemplateCacheAppender
       end
     end
   end

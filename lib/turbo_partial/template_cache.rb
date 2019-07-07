@@ -4,7 +4,7 @@ module TurboPartial
   TemplateCache = Hash.new
 
   module Template
-    module TemplateCacher
+    module TemplateCacheAppender
       def initialize(*)
         super
 
