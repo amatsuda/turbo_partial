@@ -15,6 +15,7 @@ module TurboPartial
 
         require_relative 'template_cache'
         ActionView::Template.prepend TurboPartial::Template::TemplateCacheAppender
+        ActionView::LookupContext::DetailsKey.singleton_class.prepend TurboPartial::LookupContext::TemplateCacheClearer
       end
     end
   end

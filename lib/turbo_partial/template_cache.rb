@@ -12,4 +12,14 @@ module TurboPartial
       end
     end
   end
+
+  module LookupContext
+    module TemplateCacheClearer
+      def clear
+        super
+
+        TurboPartial::TemplateCache.clear
+      end
+    end
+  end
 end
