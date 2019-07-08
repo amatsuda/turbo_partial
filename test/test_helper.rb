@@ -8,6 +8,6 @@ require "turbo_partial"
 require "minitest/autorun"
 require 'byebug'
 
-ENV['RAILS_ENV'] = 'test'
+ENV['RAILS_ENV'] ||= 'test'
 
 require_relative 'dummy_app/dummy_app'
