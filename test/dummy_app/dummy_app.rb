@@ -8,6 +8,7 @@ module TurboPartialTestApp
     config.eager_load = false
     config.active_support.deprecation = :log
     config.root = __dir__
+    config.secret_key_base = '/ë wëhlo wëh soï soï d/ë wëhsö wëh loï'
   end.initialize!
 
   Application.routes.draw do
