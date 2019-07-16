@@ -18,6 +18,8 @@ module TurboPartialTestApp
     end
 
     resources :sushis, only: :index
+
+    root 'bench#show'
   end
 end
 
@@ -43,5 +45,10 @@ end
 class SushisController < ApplicationController
   def index
     @sushis = 10.times.map {|i| Sushi.new i + 1 }
+  end
+end
+
+class BenchController < ApplicationController
+  def show
   end
 end
