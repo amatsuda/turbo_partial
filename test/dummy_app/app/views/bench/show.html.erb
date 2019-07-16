@@ -1,11 +1,14 @@
 <html><body>
 <%= render 'bench/partial' %>
 <% a = [*1..10000] %>
-<% now = Time.now %>
-<% for i in a %><%= render 'bench/partial', i: i %><% end %>
+
+render_partial:
+<% now = Time.now %><% for i in a %><%= render 'bench/partial', i: i %><% end %>
 <% result = Time.now - now %>
-<div id="normal"><%= result %></div>
-<% now = Time.now %>
-<% for i in a %><%= render './partial', i: i %><% end %>
+<span id="normal"><%= result %></span>
+<br>
+
+render_relative:
+<% now = Time.now %><% for i in a %><%= render './partial', i: i %><% end %>
 <% result = Time.now - now %>
-<div id="relative"><%= result %></div>
+<span id="relative"><%= result %></span>

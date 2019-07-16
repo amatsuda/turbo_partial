@@ -16,4 +16,7 @@ APP_PATH = Rails.root.join('dummy_app').to_s
 
 require "rails/command"
 
+puts "Starting up the benchmark server. Visit http://localhost:3000/ for benchmarking."
+puts
+
 Rails::Command.invoke 'server'
